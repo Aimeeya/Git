@@ -21,41 +21,6 @@
        
 </head>
 <body > 
-<?php
-$uid =  basename(dirname(__FILE__));
-//判断你在（盗版云）系统的UID，每个盗版云用户的UID都不一样的
-$dir = "/home/wwwroot/weixin.yudw.com/uid/".$uid."/";
-
-$openid = array();
-if (is_dir($dir)) {
-    if ($dh = opendir($dir)) {
-        while (($file = readdir($dh)) !== false) {
-            $filetype = strstr($file, '.'); //参数为空, 返回查找值.之后
-            if($filetype == '.txt'){
-            $filename = strstr($file, '.', TRUE); //参数设定true, 返回查找值.之前的前面部分
-            if($filename !== '' and $filename !== 'log' ){
-                $file_path = "/home/wwwroot/weixin.yudw.com/uid/".$uid."/".$filename.".txt";
-                $cishu = file_get_contents($file_path);
-                $openid[$filename] = $cishu;
-            }
-            } 
-        } 
-        closedir($dh);
-    }
-}
-echo '<table border="1" width="400" align="left">';
-echo '<caption><h1>访客点击数据统计</h1></caption>';
-echo '<tr bgcolor="#dddddd">';
-echo '<th>访客的openid</th><th>点击次数</th>';
-echo '</tr>';
-foreach ($openid as $key=>$value)
-{
-    echo '<tr>';
-    echo '<td>'.$key.'</td><td>'.$value.'</td>';
-    echo '</tr>';
-}
-echo '</table>';
-?>
      <div id="side-menu" class="move-me" >
         <hr class="hr-set" />
         <span class="logo-text" >网络152<?php $openid?></span>  <i  class="menu-close-icon fa fa-angle-double-left fa-2x"></i> 
